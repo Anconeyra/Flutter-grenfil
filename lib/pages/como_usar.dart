@@ -8,7 +8,7 @@ class ComoUsarScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // Reemplazamos el guión bajo por convención de nombres.
     YoutubePlayerController videoController = YoutubePlayerController(
-      initialVideoId: 'dQw4w9WgXcQ', // Ejemplo: ID de un video de Rick Astley
+      initialVideoId: 'yuuLMRRGgp4', // Ejemplo: ID de un video de Rick Astley
       flags: const YoutubePlayerFlags( // Agregamos const aquí
         autoPlay: false,
         mute: false, // Cambiamos mute a false para activar el sonido
