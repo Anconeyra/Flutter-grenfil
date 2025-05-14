@@ -1,0 +1,35 @@
+name: greenfi
+description: "A new Flutter project."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.3
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  http: ^1.4.0
+  logger: ^1.4.0
+  youtube_player_flutter: ^9.1.1
+  flutter_inappwebview: ^6.0.0-beta.25 
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  android:
+    image_path: "assets/images/ic_launcher.png"
+    name: "ic_launcher" # Forzamos el nombre de salida a "ic_launcher.png"
+  ios: true
+  image_path: "assets/images/ic_launcher.png"
+
+flutter:
+  assets:
+    - assets/images/logo.png
+    - assets/images/whatsapp.jpeg
+  uses-material-design: true

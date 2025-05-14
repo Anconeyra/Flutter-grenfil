@@ -1,0 +1,47 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    // El plugin de Flutter Gradle debe aplicarse después de los plugins de Android y Kotlin Gradle.
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+android {
+    // Namespace para el código de tu aplicación. Debe coincidir con applicationId.
+    namespace "com.example.greenfi" // Asegúrate de usar tu identificador de paquete único.
+    compileSdkVersion flutter.compileSdkVersion
+    ndkVersion flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    defaultConfig {
+        // Identificador único para tu aplicación. Se usa en Google Play Store.
+        applicationId "com.example.greenfi"  // Debe coincidir con el namespace
+        minSdkVersion flutter.minSdkVersion
+        targetSdkVersion flutter.targetSdkVersion
+        versionCode flutter.versionCode
+        versionName flutter.versionName
+    }
+
+    buildTypes {
+        release {
+            // Configuración de firma para builds de producción.
+            // Por ahora, usa la configuración de depuración. ¡Debes cambiar esto!
+            signingConfig signingConfigs.debug
+        }
+    }
+}
+
+
+flutter {
+    source "../.."
+}
+dependencies{
+    classpath 'com.android.tools.build:gradle:7.4.2'
+}
