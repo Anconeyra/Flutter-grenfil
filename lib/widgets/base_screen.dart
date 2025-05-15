@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import '../screens/filament_screen.dart'; // Importa la página Filamentos
+import '../pages/como_usar.dart'; // Importa la página ComoUsar
+import '../pages/home_page.dart'; // Importa la página Homepage
+import '../pages/carrito.dart'; // Importa la página Carrito
 
 class BaseScreen extends StatelessWidget {
   final Widget body;
@@ -70,6 +73,21 @@ class BaseScreen extends StatelessWidget {
                 ),
               ),
               ListTile(
+                leading: const Icon(Icons.home, color: Colors.black),
+                title: const Text('Home'),
+                onTap: () {
+                  // Navega a la página de Homepage
+                  Navigator.pushReplacement(
+                    // Usa pushReplacement para evitar volver atrás
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                        const HomePage(), // Usa la clase HomePage
+                    ),
+                  );
+                },
+              ),
+              ListTile(
                 leading: const Icon(Icons.shopping_bag, color: Colors.black),
                 title: const Text('Filamentos'),
                 onTap: () {
@@ -77,9 +95,10 @@ class BaseScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            const FilamentosScreen()), // Usa la clase FilamentosScreen
-                    );
+                      builder: (context) =>
+                        const FilamentosScreen(), // Usa la clase FilamentosScreen
+                    ),
+                  );
                 },
               ),
               const ListTile(
@@ -87,15 +106,32 @@ class BaseScreen extends StatelessWidget {
                 title: Text('Servicio de Impresión'),
                 onTap: null,
               ),
-              const ListTile(
-                leading: Icon(Icons.help, color: Colors.black),
-                title: Text('¿Cómo Usar?'),
-                onTap: null,
+              ListTile(
+                leading: const Icon(Icons.help, color: Colors.black),
+                title: const Text('¿Cómo Usar?'),
+                onTap: () {
+                  // Navega a la página de Como Usar
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                        const ComoUsarScreen(), // Usa la clase ComoUsarPage
+                    ),
+                  );
+                },
               ),
-              const ListTile(
-                leading: Icon(Icons.shopping_cart, color: Colors.black),
-                title: Text('Carrito'),
-                onTap: null,
+              ListTile(
+                leading: const Icon(Icons.shopping_cart, color: Colors.black),
+                title: const Text('Carrito'),
+                onTap: () {
+                  // Navega a la página del Carrito
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const CarritoPage(), // Usa la clase CarritoPage
+                    ),
+                  );
+                },
               ),
             ],
           ),

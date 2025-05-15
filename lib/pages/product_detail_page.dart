@@ -8,12 +8,13 @@ class ProductDetailPage extends StatefulWidget {
   const ProductDetailPage({super.key, required this.productId});
 
   @override
-  State<ProductDetailPage> createState() => _ProductDetailPageState();
+  _ProductDetailPageState createState() => _ProductDetailPageState();
 }
 
 class _ProductDetailPageState extends State<ProductDetailPage> {
   late Future<dynamic> _productoFuture;
   final String _apiBaseUrl = "http://10.0.2.2:5088/api/Productos";
+  int _quantity = 1; // Contador para la cantidad
 
   @override
   void initState() {
@@ -31,6 +32,20 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       }
     } catch (e) {
       throw Exception('Error de conexión: $e');
+    }
+  }
+
+  void _incrementQuantity() {
+    setState(() {
+      _quantity++;
+    });
+  }
+
+  void _decrementQuantity() {
+    if (_quantity > 1) { // Asegurarse de que la cantidad no sea menor que 1
+        setState(() {
+          _quantity--;
+        });
     }
   }
 
@@ -153,32 +168,50 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   style: const TextStyle(fontSize: 16),
                 ),
                 const SizedBox(height: 32),
-                // Botón de acción
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton.icon(
-                    onPressed: () {
-                      // Lógica para añadir al carrito
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Producto añadido al carrito'),
-                          duration: Duration(seconds: 2),
+                // Contador y botón de añadir al carrito
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.remove),
+                          onPressed: _decrementQuantity,
                         ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0),
+                        Text(
+                          '$_quantity',
+                          style: const TextStyle(fontSize: 20),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.add),
+                          onPressed: _incrementQuantity,
+                        ),
+                      ],
+                    ),
+                    ElevatedButton.icon(
+                      onPressed: () {
+                        // Lógica para añadir al carrito
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('$_quantity Producto(s) añadido(s) al carrito'),
+                            duration: const Duration(seconds: 2),
+                          ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.green,
+                        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24), // Ajusta el padding horizontal
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                      ),
+                      icon: const Icon(Icons.shopping_cart, color: Colors.white),
+                      label: const Text(
+                        'Añadir al carrito',
+                        style: TextStyle(fontSize: 18, color: Colors.white),
                       ),
                     ),
-                    icon: const Icon(Icons.shopping_cart, color: Colors.white),
-                    label: const Text(
-                      'Añadir al carrito',
-                      style: TextStyle(fontSize: 18, color: Colors.white),
-                    ),
-                  ),
+                  ],
                 ),
               ],
             ),
@@ -197,4 +230,3 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     );
   }
 }
-

@@ -12,7 +12,6 @@ class FilamentosScreen extends StatefulWidget {
 }
 
 class _FilamentosScreenState extends State<FilamentosScreen> {
-
   final String _apiUrl = "http://10.0.2.2:5088/api/Productos";
   // La lista de productos obtenidos de la API.
   List<dynamic> _productos = [];
@@ -81,22 +80,45 @@ class _FilamentosScreenState extends State<FilamentosScreen> {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              controller: _searchController, // Asigna el controlador al campo de texto.
-              decoration: const InputDecoration(
-                labelText: 'Buscar Filamentos', // Etiqueta del campo de texto.
-                hintText: 'Ingrese nombre del filamento', // Texto de sugerencia.
-                prefixIcon: Icon(Icons.search), // Icono de búsqueda.
-              ),
-              onChanged: (value) {
-                // Llama a setState para reconstruir el widget con los productos filtrados
-                setState(() {});
-              },
+            padding: const EdgeInsets.all(16.0), // Aumenta el padding para mayor espacio
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                RichText( // Usa RichText para aplicar diferentes estilos a diferentes partes del texto
+                  text: const TextSpan(
+                    style: TextStyle(fontSize: 16, color: Colors.black87), // Estilo por defecto
+                    children: <TextSpan>[
+                      TextSpan(text: 'En GreenFil te ofrecemos un '),
+                      TextSpan(text: 'filamento único', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.green)), // Resalta "filamento único"
+                      TextSpan(text: ', hecho a base de botellas PET recicladas. Ideal para tus proyectos de impresión 3D, disponible en distintos colores para que tus ideas cobren vida con estilo.'),
+                    ],
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+                const SizedBox(height: 16), // Aumenta el espacio antes del TextField
+                TextField(
+                  controller: _searchController,
+                  decoration: InputDecoration(
+                    hintText: 'Buscar Filamentos',
+                    prefixIcon: const Icon(Icons.search),
+                    border: OutlineInputBorder( // Añade un borde al TextField para mejor apariencia
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    focusedBorder: OutlineInputBorder( // Estilo del borde cuando el TextField está enfocado
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: const BorderSide(color: Colors.green, width: 2.0), // Borde verde y más grueso
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0), // Ajusta el padding del contenido
+                  ),
+                  onChanged: (value) {
+                    setState(() {});
+                  },
+                ),
+              ],
             ),
           ),
           Expanded(
-            child: _buildProductList(), // Muestra la lista de productos.
+            child: _buildProductList(),
           ),
         ],
       ),
@@ -106,14 +128,14 @@ class _FilamentosScreenState extends State<FilamentosScreen> {
   // Función para construir la lista de productos.
   Widget _buildProductList() {
     if (_isLoading) {
-      return const Center(child: CircularProgressIndicator()); // Muestra un indicador de carga mientras se obtienen los datos.
+      return const Center(child: CircularProgressIndicator());
     } else if (_error.isNotEmpty) {
-      return Center(child: Text(_error)); // Muestra un mensaje de error si ocurre alguno.
+      return Center(child: Text(_error));
     } else if (_productos.isEmpty) {
-      return const Center(child: Text('No hay filamentos disponibles.')); // Muestra un mensaje si no hay productos.
+      return const Center(child: Text('No hay filamentos disponibles.'));
     } else {
       final List<dynamic> filteredProductos =
-          _filterProductos(_searchController.text); // Filtra los productos según la consulta.
+          _filterProductos(_searchController.text);
       return GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
