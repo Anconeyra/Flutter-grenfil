@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-
 class ProductDetailPage extends StatefulWidget {
   final int productId;
 
@@ -38,7 +37,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       appBar: AppBar(
         title: const Text('Detalles del Producto'),
         backgroundColor: Colors.black,
@@ -58,7 +56,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   const SizedBox(height: 16),
                   Text(
                     'Error al cargar el producto',
-                  
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   Text(
@@ -101,14 +98,14 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         height: 300,
                         color: Colors.grey[200],
                         child: const Center(
-                          child: Icon(Icons.image_not_supported, size: 50, color: Colors.grey),
+                          child: Icon(Icons.image_not_supported,
+                              size: 50, color: Colors.grey),
                         ),
                       );
                     },
                   ),
                 ),
                 const SizedBox(height: 24),
-
                 // Nombre y precio
                 Text(
                   producto['nombre'] ?? 'Sin nombre',
@@ -127,7 +124,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   ),
                 ),
                 const SizedBox(height: 16),
-
                 // Tipo y stock
                 Row(
                   children: [
@@ -143,7 +139,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   ],
                 ),
                 const SizedBox(height: 24),
-
                 // Descripción
                 const Text(
                   'Descripción:',
@@ -158,7 +153,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   style: const TextStyle(fontSize: 16),
                 ),
                 const SizedBox(height: 32),
-
                 // Botón de acción
                 SizedBox(
                   width: double.infinity,
@@ -203,3 +197,4 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     );
   }
 }
+

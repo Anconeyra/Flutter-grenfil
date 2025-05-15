@@ -32,4 +32,5 @@ flutter:
   assets:
     - assets/images/logo.png
     - assets/images/whatsapp.jpeg
+    - assets/images/image.png
   uses-material-design: true

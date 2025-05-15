@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import '../screens/filament_screen.dart'; // Importa la página Filamentos
 
 class BaseScreen extends StatelessWidget {
-  final Widget body; // Contenido principal de la pantalla
-  final String title; // Título del encabezado
+  final Widget body;
+  final String title;
 
   const BaseScreen({
-    super.key,
+    super.key, // Usa super.key
     required this.body,
     required this.title,
   });
@@ -14,12 +15,12 @@ class BaseScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: true, // Habilita el ícono del menú para abrir el Drawer
-        iconTheme: const IconThemeData(color: Colors.white), // Ícono del menú en blanco
+        automaticallyImplyLeading: true,
+        iconTheme: const IconThemeData(color: Colors.white),
         title: Row(
           children: [
             Image.asset(
-              'assets/images/logo.png', // Ruta del logo
+              'assets/images/logo.png',
               height: 40,
             ),
             const SizedBox(width: 10),
@@ -43,7 +44,7 @@ class BaseScreen extends StatelessWidget {
       ),
       drawer: Drawer(
         child: Container(
-          color: Colors.white, // Fondo blanco para el Drawer
+          color: Colors.white,
           child: ListView(
             padding: EdgeInsets.zero,
             children: [
@@ -54,7 +55,7 @@ class BaseScreen extends StatelessWidget {
                 child: Row(
                   children: [
                     Image.asset(
-                      'assets/images/logo.png', // Ruta del logo
+                      'assets/images/logo.png',
                       height: 60,
                     ),
                     const SizedBox(width: 10),
@@ -68,25 +69,33 @@ class BaseScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              const ListTile(
-                leading: Icon(Icons.shopping_bag, color: Colors.black),
-                title: Text('Filamentos'),
-                onTap: null, // Acción para "Filamentos"
+              ListTile(
+                leading: const Icon(Icons.shopping_bag, color: Colors.black),
+                title: const Text('Filamentos'),
+                onTap: () {
+                  // Navega a la página de Filamentos
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            const FilamentosScreen()), // Usa la clase FilamentosScreen
+                    );
+                },
               ),
               const ListTile(
                 leading: Icon(Icons.print, color: Colors.black),
                 title: Text('Servicio de Impresión'),
-                onTap: null, // Acción para "Servicio de Impresión"
+                onTap: null,
               ),
               const ListTile(
                 leading: Icon(Icons.help, color: Colors.black),
                 title: Text('¿Cómo Usar?'),
-                onTap: null, // Acción para "¿Cómo Usar?"
+                onTap: null,
               ),
               const ListTile(
                 leading: Icon(Icons.shopping_cart, color: Colors.black),
                 title: Text('Carrito'),
-                onTap: null, // Acción para "Carrito"
+                onTap: null,
               ),
             ],
           ),
@@ -94,7 +103,6 @@ class BaseScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          // Encabezado fijo con el título
           Container(
             color: Colors.black,
             width: double.infinity,
@@ -104,7 +112,7 @@ class BaseScreen extends StatelessWidget {
                 IconButton(
                   icon: const Icon(Icons.arrow_back, color: Colors.white),
                   onPressed: () {
-                    Navigator.pop(context); // Navegar hacia atrás
+                    Navigator.pop(context);
                   },
                 ),
                 const SizedBox(width: 10),
@@ -119,10 +127,9 @@ class BaseScreen extends StatelessWidget {
               ],
             ),
           ),
-          // Contenido desplazable
           Expanded(
             child: Container(
-              color: Colors.white, // Fondo blanco para el contenido
+              color: Colors.white,
               child: body,
             ),
           ),
@@ -131,3 +138,4 @@ class BaseScreen extends StatelessWidget {
     );
   }
 }
+

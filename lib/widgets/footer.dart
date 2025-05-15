@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../pages/como_usar.dart'; // Importa la pantalla ComoUsarScreen
-import '../pages/consejos.dart'; // Importa la pantalla ConsejosScreen
+import '../pages/como_usar.dart'; // Importa ti ComoUsarScreen
+import '../pages/consejos.dart'; // Importa ti ConsejosScreen
+import '../pages/direccion.dart'; // Importa ti DireccionScreen
 
 class Footer extends StatelessWidget {
   const Footer({super.key});
@@ -30,7 +31,7 @@ class Footer extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      // Navegar a la pantalla de "Cómo usar el filamento"
+                      // Mapan iti ComoUsarScreen
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => const ComoUsarScreen()),
@@ -40,7 +41,7 @@ class Footer extends StatelessWidget {
                       'Cómo usar el filamento',
                       style: TextStyle(
                         color: Colors.blue,
-                        fontSize: 12,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
                         decoration: TextDecoration.underline,
                       ),
@@ -48,7 +49,7 @@ class Footer extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      // Navegar a la pantalla de "Consejos y soluciones"
+                      // Mapan iti ConsejosScreen
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => const ConsejosScreen()),
@@ -58,7 +59,7 @@ class Footer extends StatelessWidget {
                       'Consejos y soluciones',
                       style: TextStyle(
                         color: Colors.blue,
-                        fontSize: 12,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
                         decoration: TextDecoration.underline,
                       ),
@@ -67,17 +68,31 @@ class Footer extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 10),
-              const Text(
-                'Horario de Atención:',
-                style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-              const Text(
-                'Lunes a Viernes: 10:00 AM a 5:00 PM UTC',
-                style: TextStyle(color: Colors.white, fontSize: 14),
-              ),
-              const Text(
-                'Sábados: 10:00 AM a 1:00 AM UTC',
-                style: TextStyle(color: Colors.white, fontSize: 14),
+              GestureDetector(
+                onTap: () {
+                  // Mapan iti DireccionScreen
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const DireccionScreen()),
+                  );
+                },
+                child: const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Horario de Atención:',
+                      style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      'Lunes a Viernes: 10:00 AM a 5:00 PM UTC',
+                      style: TextStyle(color: Colors.white, fontSize: 14),
+                    ),
+                    Text(
+                      'Sábados: 10:00 AM a 1:00 AM UTC',
+                      style: TextStyle(color: Colors.white, fontSize: 14),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

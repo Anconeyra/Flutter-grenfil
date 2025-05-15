@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../widgets/footer.dart'; // Footer personalizado
-import 'product_detail_page.dart'; // Asegúrate de tener esta página
+import 'product_detail_page.dart';
+import '../widgets/base_screen.dart'; // Importa BaseScreen
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -45,64 +46,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          children: [
-            Image.asset('assets/images/logo.png', height: 40),
-            const SizedBox(width: 10),
-            const Text('GreenFil',
-                style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold)),
-            const Spacer(),
-            TextButton(
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, '/login');
-              },
-              child: const Text('Cerrar Sesión', style: TextStyle(color: Colors.white)),
-            ),
-          ],
-        ),
-        backgroundColor: Colors.black,
-        iconTheme: const IconThemeData(color: Colors.white),
-      ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            DrawerHeader(
-              decoration: const BoxDecoration(color: Colors.black),
-              child: Row(
-                children: [
-                  Image.asset('assets/images/logo.png', height: 60),
-                  const SizedBox(width: 10),
-                  const Text('GreenFil',
-                      style: TextStyle(color: Colors.white, fontSize: 24)),
-                ],
-              ),
-            ),
-            ListTile(
-              leading: const Icon(Icons.shopping_bag, color: Colors.black),
-              title: const Text('Filamentos'),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: const Icon(Icons.print, color: Colors.black),
-              title: const Text('Servicio de Impresión'),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: const Icon(Icons.help, color: Colors.black),
-              title: const Text('¿Cómo Usar?'),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: const Icon(Icons.shopping_cart, color: Colors.black),
-              title: const Text('Carrito'),
-              onTap: () {},
-            ),
-          ],
-        ),
-      ),
+    return BaseScreen(
+      title: 'GreenFil', // Establece el título para BaseScreen
+      // showBackButton: false, // No mostrar botón de retroceso en HomePage  <-- Eliminado
       body: Column(
         children: [
           Expanded(
@@ -118,7 +64,10 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         const Text(
                           'Venta de Filamento 3D',
-                          style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 10),
                         const Text(
@@ -135,7 +84,8 @@ class _HomePageState extends State<HomePage> {
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.green,
-                                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 10),
                               ),
                               child: const Text('Mira nuestro catálogo'),
                             ),
@@ -145,12 +95,14 @@ class _HomePageState extends State<HomePage> {
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.green,
-                                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 10),
                               ),
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Image.asset('assets/images/whatsapp.jpeg', height: 20, width: 20),
+                                  Image.asset('assets/images/whatsapp.jpeg',
+                                      height: 20, width: 20),
                                   const SizedBox(width: 8),
                                   const Text('Haz tu pedido'),
                                 ],
@@ -166,9 +118,11 @@ class _HomePageState extends State<HomePage> {
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.green,
-                              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 30, vertical: 12),
                             ),
-                            child: const Text('Servicios de impresión 3D'),
+                            child:
+                                const Text('Servicios de impresión 3D'),
                           ),
                         ),
                       ],
@@ -177,7 +131,8 @@ class _HomePageState extends State<HomePage> {
                   const Padding(
                     padding: EdgeInsets.all(16.0),
                     child: Text('Más Vendidos',
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold)),
                   ),
                   productos.isEmpty
                       ? const Center(
@@ -190,7 +145,8 @@ class _HomePageState extends State<HomePage> {
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           padding: const EdgeInsets.symmetric(horizontal: 16),
-                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
                             crossAxisSpacing: 10,
                             mainAxisSpacing: 10,
@@ -202,30 +158,39 @@ class _HomePageState extends State<HomePage> {
                             return Card(
                               elevation: 4,
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                                crossAxisAlignment:
+                                    CrossAxisAlignment.start,
                                 children: [
                                   Expanded(
                                     child: Image.network(
-                                      _getImageUrl(producto['imagenUrl']),
+                                      _getImageUrl(
+                                          producto['imagenUrl']),
                                       fit: BoxFit.cover,
                                       width: double.infinity,
-                                      errorBuilder: (context, error, stackTrace) {
-                                        return const Icon(Icons.image_not_supported, size: 50);
+                                      errorBuilder: (context, error,
+                                          stackTrace) {
+                                        return const Icon(
+                                            Icons.image_not_supported,
+                                            size: 50);
                                       },
                                     ),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Text(
-                                      producto['nombre'] ?? 'Sin nombre',
-                                      style: const TextStyle(fontWeight: FontWeight.bold),
+                                      producto['nombre'] ??
+                                          'Sin nombre',
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0),
                                     child: Text(
                                       'Precio: \$${producto['precio'] ?? '0.00'}',
-                                      style: const TextStyle(color: Colors.green),
+                                      style: const TextStyle(
+                                          color: Colors.green),
                                     ),
                                   ),
                                   Padding(
@@ -235,16 +200,21 @@ class _HomePageState extends State<HomePage> {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) => ProductDetailPage(
-                                              productId: producto['id'],
+                                            builder: (context) =>
+                                                ProductDetailPage(
+                                              productId:
+                                                  producto['id'],
                                             ),
                                           ),
                                         );
                                       },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.green,
+                                      style:
+                                          ElevatedButton.styleFrom(
+                                        backgroundColor:
+                                            Colors.green,
                                       ),
-                                      child: const Text('Ver más'),
+                                      child:
+                                          const Text('Ver más'),
                                     ),
                                   ),
                                 ],
@@ -258,17 +228,11 @@ class _HomePageState extends State<HomePage> {
           ),
           const SizedBox(
             width: double.infinity,
-            child: Footer(), // Asegúrate de tener 'const' aquí
+            child: Footer(),
           ),
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/add_product');
-        },
-        backgroundColor: Colors.green,
-        child: const Icon(Icons.add, color: Colors.white),
       ),
     );
   }
 }
+
