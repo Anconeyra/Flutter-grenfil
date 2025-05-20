@@ -26,7 +26,7 @@ class ComoUsarScreen extends StatelessWidget {
               const Text(
                 'Cómo usar nuestro filamento?',
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),

@@ -198,6 +198,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           ),
                         );
                       },
+                      
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green,
                         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24), // Ajusta el padding horizontal
